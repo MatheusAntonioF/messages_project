@@ -1,19 +1,14 @@
-import { getConnectionManager } from 'typeorm';
-
 import { Request, Response } from 'express';
 
-import User from '../entity/user.entity';
+import { getRepository } from 'typeorm';
+
+import User from '../entities/user.entity';
 
 class UserController {
-  private user: User;
+  async create(request: Request, response: Response):Promise<Response> {
+    const users = await getRepository(User).create();
 
-  constructor() {
-    const connection = getConnectionManager();
-    connection.get('default').getRepository(User);
-  }
-
-  create(request: Request, response: Response) {
-    console.log('asdfasd');
+    return response.json(users);
   }
 }
 

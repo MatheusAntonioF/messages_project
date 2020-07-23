@@ -4,15 +4,25 @@ import 'reflect-metadata';
 
 import routes from './routes';
 
-import './database';
+import Database from './database';
 
 class App {
   public server: express.Express
 
+  public database: Database;
+
   constructor() {
+    this.database = this.connection();
+
     this.server = express();
+
     this.middlewares();
+
     this.routes();
+  }
+
+  connection() {
+    return new Database();
   }
 
   middlewares():void {
@@ -20,7 +30,7 @@ class App {
   }
 
   routes():void {
-    this.server.use(routes);
+    this.server.use('/', routes);
   }
 }
 

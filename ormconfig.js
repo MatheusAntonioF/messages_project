@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  name: 'default',
   type: 'sqlite',
   host: 'localhost',
   port: 3306,
@@ -10,10 +11,10 @@ module.exports = {
   synchronize: true,
   logging: false,
   entities: [
-    path.resolve(__dirname, 'src', 'entgsdfgsdfity', '*.ts'),
+    path.resolve(__dirname, 'src', 'entities', '*.ts'),
   ],
   migrations: [
-    path.resolve(__dirname, 'src', 'database','migration', '*.ts'),
+    path.resolve(__dirname, 'src', 'database','migrations', '*.ts'),
   ],
   cli: {
     entitiesDir: 'src/entity',

@@ -4,7 +4,7 @@ import {
 
 import User from './user.entity';
 
-@Entity()
+@Entity({ name: 'messages' })
 class Message {
   @PrimaryGeneratedColumn()
   id: number;

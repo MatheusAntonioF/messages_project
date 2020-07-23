@@ -1,25 +1,19 @@
-import { Connection, createConnection } from 'typeorm';
+import {
+  createConnection, getConnection, Connection,
+} from 'typeorm';
 
 class Database {
-  private connection: Connection;
-
   constructor() {
-    createConnection().then(connection => {
-      this.connection = connection;
-    });
+    this.init();
+  }
+
+  async init():Promise<Connection> {
+    return createConnection();
   }
 
   connected():boolean {
-    return typeof this.connection !== 'undefined';
-  }
-
-  getRepository(nameRepository: string) {
-    if (!this.connected()) {
-      throw new Error('Repository not found');
-    }
-
-    this.getRepository(nameRepository);
+    return getConnection().isConnected;
   }
 }
 
-export default new Database();
+export default Database;

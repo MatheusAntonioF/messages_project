@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 import app from './app';
 
-app.listen(3333, () => {
-  console.log('Server running on port 3333');
+const PORT = 3334;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
