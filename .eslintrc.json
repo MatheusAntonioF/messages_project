@@ -30,7 +30,8 @@
         "class-methods-use-this": "off",
         "camelcase": "off",
         "arrow-parens": "off",
-        "no-useless-constructor": "off"
+        "no-useless-constructor": "off",
+        "no-extra-boolean-cast": "off"
     },
     "settings": {
         "import/resolver": {
