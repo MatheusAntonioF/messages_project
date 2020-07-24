@@ -17,7 +17,9 @@ class UserController {
   async show(request: Request<{id: string}>, response: Response):Promise<Response> {
     const { id } = request.params;
 
-    const userRepository = await getRepository(User).findOne(id);
+    // const userRepository = await getRepository(User).findOne(id);
+
+    const userRepository = await getRepository(User).find({ where: { id }, relations: ['messages'] });
 
     if (!userRepository) {
       return response.status(404).json({ message: 'User not found' });
