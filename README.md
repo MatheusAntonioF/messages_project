@@ -1,7 +1,7 @@
-# Awesome Project Build with TypeORM
+# This project was made to learn typescript with typeorm 
 
-Steps to run this project:
-
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+### Technologies used
+1. express
+2. typeorm
+3. node
+4. typescript
