@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
 
-import { getRepository, getManager } from 'typeorm';
+import { getRepository } from 'typeorm';
 
 import User from '../entities/user.entity';
+
+import checkEmailExists from '../services/User/CheckEmailExists';
 
 class UserController {
   async list(request: Request, response: Response):Promise<Response> {
@@ -14,6 +16,10 @@ class UserController {
 
   async create(request: Request, response: Response):Promise<Response> {
     const userRepository = getRepository(User);
+
+    if (checkEmailExists(request.body.email)) {
+      return response.json({ message: 'Email already exists' });
+    }
 
     const newUser = userRepository.create(request.body);
 
@@ -30,12 +36,12 @@ class UserController {
     const userExists = userRepository.findOne(id);
 
     if (!!userExists) {
-      return response.status(404).json({ msg: 'User not found' });
+      return response.status(404).json({ message: 'User not found' });
     }
 
     return response
       .status(200)
-      .json({ msg: 'User deleted' });
+      .json({ message: 'User deleted' });
   }
 }
 
