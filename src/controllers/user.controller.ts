@@ -14,6 +14,18 @@ class UserController {
     return response.json(allUsers);
   }
 
+  async show(request: Request<{id: string}>, response: Response):Promise<Response> {
+    const { id } = request.params;
+
+    const userRepository = await getRepository(User).findOne(id);
+
+    if (!userRepository) {
+      return response.status(404).json({ message: 'User not found' });
+    }
+
+    return response.json(userRepository);
+  }
+
   async create(request: Request, response: Response):Promise<Response> {
     const userRepository = getRepository(User);
 
@@ -26,6 +38,18 @@ class UserController {
     const createdUser = await getRepository(User).save(newUser);
 
     return response.status(200).json(createdUser);
+  }
+
+  async update(request: Request<{id: string}>, response: Response):Promise<Response> {
+    const { id } = request.params;
+
+    const user = request.body as User;
+
+    await getRepository(User).update(id, user);
+
+    const userUpdated = await getRepository(User).findOne(id);
+
+    return response.json(userUpdated);
   }
 
   async delete(request: Request<{id: string}>, response: Response):Promise<Response> {
